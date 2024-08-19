@@ -7,9 +7,6 @@ import plotly.express as px
 import geopandas as gpd
 from matplotlib import font_manager, rc
 
-import requests
-from io import BytesIO
-
 # GitHub raw content URL의 data.csv 파일 경로
 file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data.csv'
 
