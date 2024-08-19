@@ -15,9 +15,6 @@ file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data.csv'
 def load_data(file_path):
     data = pd.read_csv(file_path, encoding='cp949')
 
-    # '년도' 열을 int 타입으로 변환하여 콤마를 제거
-    data['년도'] = data['년도'].astype(int)
-    
     return data
 
 data = load_data(file_path)
@@ -40,4 +37,5 @@ st.pyplot(plt)
 
 # 데이터 확인
 st.write("2001년~2003년 대전시 순이동 인구수")
-st.write(data)
+st.table(data)
+#st.write(data)
