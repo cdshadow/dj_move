@@ -17,28 +17,30 @@ def load_data(file_path):
 
 data = load_data(file_path)
 
-# Plotly를 이용한 꺾은선 그래프
-fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화',
-              markers=True)
-
-# x축의 모든 연도를 표시하도록 수정
-fig.update_xaxes(tickmode='linear', tick0=data['년도'].min(), dtick=1)
-
-# y축의 간격을 5,000 단위로 설정
-fig.update_yaxes(tick0=0, dtick=5000)
-
-# 그래프 커스터마이징 (선택 사항)
-fig.update_traces(line=dict(width=2))
-fig.update_layout(xaxis_title='년도', yaxis_title='순이동 인구수')
-
-# Streamlit에서 Plotly 그래프를 표시
-st.plotly_chart(fig)
-
-# 데이터 확인
-#st.write("2001년~2023년 대전시 순이동 인구수")
-st.table(data)
-
 
 with tab1:
+    # Plotly를 이용한 꺾은선 그래프
+    fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화',
+                  markers=True)
+    
+    # x축의 모든 연도를 표시하도록 수정
+    fig.update_xaxes(tickmode='linear', tick0=data['년도'].min(), dtick=1)
+    
+    # y축의 간격을 5,000 단위로 설정
+    fig.update_yaxes(tick0=0, dtick=5000)
+    
+    # 그래프 커스터마이징 (선택 사항)
+    fig.update_traces(line=dict(width=2))
+    fig.update_layout(xaxis_title='년도', yaxis_title='순이동 인구수')
+    
+    # Streamlit에서 Plotly 그래프를 표시
+    st.plotly_chart(fig)
+    
+    # 데이터 확인
+    #st.write("2001년~2023년 대전시 순이동 인구수")
+    st.table(data)
+
+
+with tab2:
     st.table(data.head(5))
     
