@@ -16,7 +16,7 @@ def load_data(file_path):
 data = load_data(file_path)
 
 # Plotly를 이용한 꺾은선 그래프
-fig = px.line(data, x='년도', y='순이동 인구수', title='',#2001년~2023년 대전시 순이동 변화
+fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화',
               markers=True)
 
 # x축의 모든 연도를 표시하도록 수정
