@@ -22,40 +22,31 @@ def load_data(file_path):
 data = load_data(file_path)
 
 # data2.csv 파일 로드
-@st.cache_data
-def load_data2(file_path2):
-    data2 = pd.read_csv(file_path2, encoding='cp949')
-    # 년도를 문자열로 변환
-    data2['년도'] = data2['년도'].astype(str)
-    return data2
+data2 = load_data(file_path2)
 
-data2 = load_data2(file_path2)
-
-# 데이터를 캐시하여 로딩
+# data3.csv 파일 로드
 @st.cache_data
-def load_data3(file_path):
+def load_data3(file_path3):
     data3 = pd.read_csv(file_path3, encoding='cp949')
     # 년도를 문자열로 변환
+    data3['년도'] = data3['년도'].astype(str)
     return data3
 
-# data.csv 파일 로드
-data3 = load_data(file_path)
-
+data3 = load_data3(file_path3)
 
 # data4.csv 파일 로드
 @st.cache_data
 def load_data4(file_path4):
     data4 = pd.read_csv(file_path4, encoding='cp949')
     # 년도를 문자열로 변환
-        return data4
+    data4['년도'] = data4['년도'].astype(str)
+    return data4
 
-data4 = load_data2(file_path4)
-
+data4 = load_data4(file_path4)
 
 with tab1:
     # Plotly를 이용한 꺾은선 그래프
-    fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화',
-                  markers=True)
+    fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화', markers=True)
     
     # x축의 모든 연도를 표시하도록 수정
     fig.update_xaxes(tickmode='linear', tick0=data['년도'].min(), dtick=1)
@@ -75,8 +66,7 @@ with tab1:
 
 with tab2:
     # Plotly를 이용한 꺾은선 그래프
-    fig = px.line(data2, x='년도', y='순이동 인구수', color='지역', title='2001년~2023년 대전시 지역별 순이동 변화',
-                  markers=True)
+    fig = px.line(data2, x='년도', y='순이동 인구수', color='지역', title='2001년~2023년 대전시 지역별 순이동 변화', markers=True)
     
     # x축의 모든 연도를 표시하도록 수정
     fig.update_xaxes(tickmode='linear', tick0=data2['년도'].min(), dtick=1)
@@ -92,13 +82,11 @@ with tab2:
     st.plotly_chart(fig)
     
     # 데이터 확인
-    st.table(data2.groupby(['년도', '지역'])['순이동 인구수'].sum())
-
+    st.table(data2.groupby(['년도', '지역'])['순이동 인구수'].sum().reset_index())
 
 with tab3:
     # Plotly를 이용한 꺾은선 그래프
-    fig = px.line(data3, x='년도', y='순이동 인구수', title='2001년~2023년 세종시 순이동 변화',
-                  markers=True)
+    fig = px.line(data3, x='년도', y='순이동 인구수', title='2001년~2023년 세종시 순이동 변화', markers=True)
     
     # x축의 모든 연도를 표시하도록 수정
     fig.update_xaxes(tickmode='linear', tick0=data3['년도'].min(), dtick=1)
@@ -116,11 +104,9 @@ with tab3:
     # 데이터 확인
     st.table(data3)
 
-
 with tab4:
     # Plotly를 이용한 꺾은선 그래프
-    fig = px.line(data4, x='년도', y='순이동 인구수', color='지역', title='2001년~2023년 세종시 지역별 순이동 변화',
-                  markers=True)
+    fig = px.line(data4, x='년도', y='순이동 인구수', color='지역', title='2001년~2023년 세종시 지역별 순이동 변화', markers=True)
     
     # x축의 모든 연도를 표시하도록 수정
     fig.update_xaxes(tickmode='linear', tick0=data4['년도'].min(), dtick=1)
@@ -136,4 +122,4 @@ with tab4:
     st.plotly_chart(fig)
     
     # 데이터 확인
-    st.table(data4.groupby(['년도', '지역'])['순이동 인구수'].sum())
+    st.table(data4.groupby(['년도', '지역'])['순이동 인구수'].sum().reset_index())
