@@ -2,31 +2,25 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from PIL import Image
-import plotly.express as px
-import geopandas as gpd
 from matplotlib import font_manager, rc
-
-
 import requests
 from io import BytesIO
 
 # GitHub에 업로드된 맑은고딕 폰트 파일 경로
-font_url = "https://raw.githubusercontent.com/cdshadow/dj_move/main/malgun.ttf"  # 실제 GitHub URL로 변경하세요
+font_url = "https://raw.githubusercontent.com/cdshadow/dj_move/main/malgun.ttf"
 
 # 폰트 파일 다운로드 및 설정
 response = requests.get(font_url)
-font_file = BytesIO(response.content)
-
-# 폰트 임시 저장 및 설정
-with open("/tmp/malgun.ttf", "wb") as f:
-    f.write(font_file.getbuffer())
-font_name = font_manager.FontProperties(fname="/tmp/malgun.ttf").get_name()
-rc('font', family=font_name)
-
-
-
-
+if response.status_code == 200:
+    font_file = BytesIO(response.content)
+    
+    # 폰트 임시 저장 및 설정
+    with open("/tmp/malgun.ttf", "wb") as f:
+        f.write(font_file.getbuffer())
+    font_name = font_manager.FontProperties(fname="/tmp/malgun.ttf").get_name()
+    rc('font', family=font_name)
+else:
+    st.write("폰트 파일을 로드하는 데 실패했습니다.")
 
 # GitHub raw content URL의 data.csv 파일 경로
 file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data.csv'
@@ -35,11 +29,9 @@ file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data.csv'
 @st.cache_data
 def load_data(file_path):
     data = pd.read_csv(file_path, encoding='cp949')
-
     return data
 
 data = load_data(file_path)
-
 
 # 2001년~2023년 대전시 순이동 데이터에 대한 꺾은선 그래프
 st.write("2001년~2023년 대전시 순이동")
@@ -59,4 +51,3 @@ st.pyplot(plt)
 # 데이터 확인
 st.write("2001년~2003년 대전시 순이동 인구수")
 st.table(data)
-#st.write(data)
