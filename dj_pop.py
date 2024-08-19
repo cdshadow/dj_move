@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 
 # GitHub raw content URL의 data.csv 파일 경로
-file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data2.csv'
+file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data.csv'
 
 # 데이터를 캐시하여 로딩
 @st.cache_data
