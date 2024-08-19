@@ -19,6 +19,7 @@ if response.status_code == 200:
         f.write(font_file.getbuffer())
     font_name = font_manager.FontProperties(fname="/tmp/malgun.ttf").get_name()
     rc('font', family=font_name)
+    st.write("폰트가 성공적으로 적용되었습니다: 맑은고딕")
 else:
     st.write("폰트 파일을 로드하는 데 실패했습니다.")
 
@@ -35,6 +36,9 @@ data = load_data(file_path)
 
 # 2001년~2023년 대전시 순이동 데이터에 대한 꺾은선 그래프
 st.write("2001년~2023년 대전시 순이동")
+
+# 폰트 적용 확인용 텍스트 출력
+st.write("이 텍스트가 맑은고딕 폰트로 표시되어야 합니다.")
 
 # Seaborn을 이용한 꺾은선 그래프
 plt.figure(figsize=(10, 6))
