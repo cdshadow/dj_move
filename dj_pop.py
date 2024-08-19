@@ -16,17 +16,18 @@ def load_data(file_path):
     data['년도'] = data['년도'].astype(str)
     return data
 
+# data.csv 파일 로드
 data = load_data(file_path)
 
-
-# 데이터를 캐시하여 로딩
+# data2.csv 파일 로드
 @st.cache_data
-def load_data(file_path):
-    data2 = pd.read_csv(file_path, encoding='cp949')
+def load_data2(file_path2):
+    data2 = pd.read_csv(file_path2, encoding='cp949')
     # 년도를 문자열로 변환
-    return data
-    
-data2 = load_data(file_path2)
+    data2['년도'] = data2['년도'].astype(str)
+    return data2
+
+data2 = load_data2(file_path2)
 
 with tab1:
     # Plotly를 이용한 꺾은선 그래프
@@ -47,10 +48,7 @@ with tab1:
     st.plotly_chart(fig)
     
     # 데이터 확인
-    #st.write("2001년~2023년 대전시 순이동 인구수")
     st.table(data)
-
-data2 = load_data(file_path2)
 
 with tab2:
     # Plotly를 이용한 꺾은선 그래프
@@ -58,7 +56,7 @@ with tab2:
                   markers=True)
     
     # x축의 모든 연도를 표시하도록 수정
-    fig.update_xaxes(tickmode='linear', tick0=data['년도'].min(), dtick=1)
+    fig.update_xaxes(tickmode='linear', tick0=data2['년도'].min(), dtick=1)
     
     # y축의 간격을 5,000 단위로 설정
     fig.update_yaxes(tick0=0, dtick=5000)
@@ -71,7 +69,4 @@ with tab2:
     st.plotly_chart(fig)
     
     # 데이터 확인
-    #st.write("2001년~2023년 대전시 지역별 순이동 인구수")
-    st.table(data)
-
-    
+    st.table(data2)
