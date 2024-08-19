@@ -14,6 +14,10 @@ file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data.csv'
 @st.cache_data
 def load_data(file_path):
     data = pd.read_csv(file_path, encoding='cp949')
+
+    # '년도' 열을 int 타입으로 변환하여 콤마를 제거
+    data['년도'] = data['년도'].astype(int)
+    
     return data
 
 data = load_data(file_path)
