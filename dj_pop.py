@@ -33,7 +33,7 @@ data2 = load_data2(file_path2)
 
 # 데이터를 캐시하여 로딩
 @st.cache_data
-def load_data(file_path):
+def load_data3(file_path):
     data3 = pd.read_csv(file_path3, encoding='cp949')
     # 년도를 문자열로 변환
     return data3
@@ -44,7 +44,7 @@ data3 = load_data(file_path)
 
 # data4.csv 파일 로드
 @st.cache_data
-def load_data4(file_path2):
+def load_data4(file_path4):
     data4 = pd.read_csv(file_path4, encoding='cp949')
     # 년도를 문자열로 변환
         return data4
