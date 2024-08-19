@@ -8,21 +8,6 @@ import geopandas as gpd
 from matplotlib import font_manager, rc
 
 
-import requests
-from io import BytesIO
-
-# GitHub에 업로드된 맑은고딕 폰트 파일 경로
-font_url = "https://raw.githubusercontent.com/cdshadow/dj_move/main/malgun.ttf"  # 실제 GitHub URL로 변경하세요
-
-# 폰트 파일 다운로드 및 설정
-response = requests.get(font_url)
-font_file = BytesIO(response.content)
-
-# 폰트 임시 저장 및 설정
-with open("/tmp/malgun.ttf", "wb") as f:
-    f.write(font_file.getbuffer())
-font_name = font_manager.FontProperties(fname="/tmp/malgun.ttf").get_name()
-rc('font', family=font_name)
 
 
 # GitHub raw content URL의 data.csv 파일 경로
