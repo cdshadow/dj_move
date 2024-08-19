@@ -69,4 +69,4 @@ with tab2:
     st.plotly_chart(fig)
     
     # 데이터 확인
-    st.table(data2)
+    st.table(data2.groupby(['년도', '지역'])['순이동 인구수'].sum().sort_index(ascending=False))
