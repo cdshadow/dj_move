@@ -35,3 +35,8 @@ st.plotly_chart(fig)
 # 데이터 확인
 #st.write("2001년~2023년 대전시 순이동 인구수")
 st.table(data)
+
+
+with tab1:
+    st.table(data.head(5))
+    
