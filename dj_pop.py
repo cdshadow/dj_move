@@ -14,7 +14,6 @@ def load_data(file_path):
 data = load_data(file_path)
 
 # 2001년~2023년 대전시 순이동 데이터에 대한 꺾은선 그래프
-# st.write("2001년~2023년 대전시 순이동")
 
 # Plotly를 이용한 꺾은선 그래프
 fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화',
