@@ -7,6 +7,9 @@ import plotly.express as px
 import geopandas as gpd
 from matplotlib import font_manager, rc
 
+# 한글 폰트 설정
+plt.rcParams['font.family'] = "ApploGothic"
+
 # GitHub raw content URL의 data.csv 파일 경로
 file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data.csv'
 
