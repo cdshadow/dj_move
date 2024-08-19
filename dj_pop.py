@@ -20,6 +20,9 @@ st.write("2001년~2023년 대전시 순이동")
 fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화',
               markers=True)
 
+# x축의 모든 연도를 표시하도록 수정
+fig.update_xaxes(tickmode='linear', tick0=data['년도'].min(), dtick=1)
+
 # 그래프 커스터마이징 (선택 사항)
 fig.update_traces(line=dict(width=2))
 fig.update_layout(xaxis_title='년도', yaxis_title='순이동 인구수')
