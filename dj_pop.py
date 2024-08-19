@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-tab1, tab2 = st.tabs(['순이동', '탭'])
+tab1, tab2 = st.tabs(['대전시 년도별 순이동', '대전시 년도별·지역별 순이동'])
 
 # GitHub raw content URL의 data.csv 파일 경로
 file_path = 'https://raw.githubusercontent.com/cdshadow/dj_move/main/data.csv'
