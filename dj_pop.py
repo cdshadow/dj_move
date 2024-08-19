@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from PIL import Image
+import plotly.express as px
+import geopandas as gpd
+from matplotlib import font_manager, rc
 
 # GitHub raw content URL의 data.csv 파일 경로
 file_path = 'https://raw.githubusercontent.com/cdshadow/dj_pop/main/data.csv'
