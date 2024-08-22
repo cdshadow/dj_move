@@ -24,12 +24,6 @@ data = load_data(file_path)
 # data2.csv 파일 로드
 data2 = load_data(file_path2)
 
-option = st.selectbox(
-    label='your selectionis',
-    options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도' ],
-)
-st.text('you selected: {}'.format(option))
-
 # data3.csv 파일 로드
 @st.cache_data
 def load_data3(file_path3):
@@ -71,11 +65,21 @@ with tab1:
     st.table(data)
 
 with tab2:
+    # selectbox를 두 번째 탭 안에 넣음
+    option = st.selectbox(
+        label='지역을 선택하세요',
+        options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도' ],
+    )
+    st.text(f'선택한 지역: {option}')
+    
+    # 선택한 지역에 따라 데이터 필터링
+    filtered_data2 = data2[data2['지역'] == option]
+    
     # Plotly를 이용한 꺾은선 그래프
-    fig = px.line(data2, x='년도', y='순이동 인구수', color='지역', title='2001년~2023년 대전시 지역별 순이동 변화', markers=True)
+    fig = px.line(filtered_data2, x='년도', y='순이동 인구수', title=f'2001년~2023년 대전시 {option} 순이동 변화', markers=True)
     
     # x축의 모든 연도를 표시하도록 수정
-    fig.update_xaxes(tickmode='linear', tick0=data2['년도'].min(), dtick=1)
+    fig.update_xaxes(tickmode='linear', tick0=filtered_data2['년도'].min(), dtick=1)
     
     # y축의 간격을 5,000 단위로 설정
     fig.update_yaxes(tick0=0, dtick=5000)
@@ -88,7 +92,7 @@ with tab2:
     st.plotly_chart(fig)
     
     # 데이터 확인
-    st.table(data2.groupby(['년도', '지역'])['순이동 인구수'].sum().reset_index())
+    st.table(filtered_data2.groupby(['년도', '지역'])['순이동 인구수'].sum().reset_index())
 
 with tab3:
     # Plotly를 이용한 꺾은선 그래프
