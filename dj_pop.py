@@ -24,6 +24,12 @@ data = load_data(file_path)
 # data2.csv 파일 로드
 data2 = load_data(file_path2)
 
+option = st.selectbox(
+    label='your selectionis',
+    options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도' ],
+)
+st.text('you selected: {}'.format(option))
+
 # data3.csv 파일 로드
 @st.cache_data
 def load_data3(file_path3):
@@ -33,12 +39,6 @@ def load_data3(file_path3):
     return data3
 
 data3 = load_data3(file_path3)
-
-option = st.selectbox(
-    label='your selectionis',
-    options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도' ],
-)
-st.text('you selected: {}'.format(option))
 
 # data4.csv 파일 로드
 @st.cache_data
