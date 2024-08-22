@@ -44,14 +44,6 @@ def load_data4(file_path4):
 
 data4 = load_data4(file_path4)
 
-with st.sidebar:
-    st.title('This is sidebar')
-    side_option = st.multiselect(
-        label='your selection is',
-        options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '대전광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도'],
-        placeholder='select trans'
-    )
-
 with tab1:
     # Plotly를 이용한 꺾은선 그래프
     fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화', markers=True)
@@ -73,9 +65,16 @@ with tab1:
     st.table(data)
 
 with tab2:
+    # 두 번째 탭에만 적용되는 multiselect
+    side_option_tab2 = st.multiselect(
+        label='대전시 지역을 선택하세요',
+        options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '대전광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도'],
+        placeholder='지역 선택'
+    )
+    
     # 선택된 지역이 있을 경우 데이터 필터링
-    if side_option:
-        filtered_data2 = data2[data2['지역'].isin(side_option)]
+    if side_option_tab2:
+        filtered_data2 = data2[data2['지역'].isin(side_option_tab2)]
     else:
         filtered_data2 = data2
 
@@ -119,11 +118,24 @@ with tab3:
     st.table(data3)
 
 with tab4:
+    # 네 번째 탭에만 적용되는 multiselect
+    side_option_tab4 = st.multiselect(
+        label='세종시 지역을 선택하세요',
+        options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '대전광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도'],
+        placeholder='지역 선택'
+    )
+
+    # 선택된 지역이 있을 경우 데이터 필터링
+    if side_option_tab4:
+        filtered_data4 = data4[data4['지역'].isin(side_option_tab4)]
+    else:
+        filtered_data4 = data4
+
     # Plotly를 이용한 꺾은선 그래프
-    fig = px.line(data4, x='년도', y='순이동 인구수', color='지역', title='2001년~2023년 세종시 지역별 순이동 변화', markers=True)
+    fig = px.line(filtered_data4, x='년도', y='순이동 인구수', color='지역', title=f'2001년~2023년 세종시 지역별 순이동 변화', markers=True)
     
     # x축의 모든 연도를 표시하도록 수정
-    fig.update_xaxes(tickmode='linear', tick0=data4['년도'].min(), dtick=1)
+    fig.update_xaxes(tickmode='linear', tick0=filtered_data4['년도'].min(), dtick=1)
     
     # y축의 간격을 5,000 단위로 설정
     fig.update_yaxes(tick0=0, dtick=5000)
@@ -136,4 +148,4 @@ with tab4:
     st.plotly_chart(fig)
     
     # 데이터 확인
-    st.table(data4.groupby(['년도', '지역'])['순이동 인구수'].sum().reset_index())
+    st.table(filtered_data4.groupby(['년도', '지역'])['순이동 인구수'].sum().reset_index())
