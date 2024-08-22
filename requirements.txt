@@ -5,3 +5,4 @@ seaborn
 pillow
 plotly
 geopandas
+ipython
