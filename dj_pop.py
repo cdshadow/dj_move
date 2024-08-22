@@ -44,6 +44,14 @@ def load_data4(file_path4):
 
 data4 = load_data4(file_path4)
 
+with st.sidebar:
+    st.title('This is sidebar')
+    side_option = st.multiselect(
+        label='your selection is',
+        options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도'],
+        placeholder='select trans'
+    )
+
 with tab1:
     # Plotly를 이용한 꺾은선 그래프
     fig = px.line(data, x='년도', y='순이동 인구수', title='2001년~2023년 대전시 순이동 변화', markers=True)
@@ -65,18 +73,14 @@ with tab1:
     st.table(data)
 
 with tab2:
-    # selectbox를 두 번째 탭 안에 넣음
-    option = st.selectbox(
-        label='지역을 선택하세요',
-        options=['강원특별자치도', '경기도', '경상남도', '경상북도', '광주광역시', '대구광역시', '부산광역시', '서울특별시', '세종특별자치시', '울산광역시', '인천광역시', '전라남도', '전북특별자치도', '제주특별자치도', '충청남도', '충청북도' ],
-    )
-    st.text(f'선택한 지역: {option}')
-    
-    # 선택한 지역에 따라 데이터 필터링
-    filtered_data2 = data2[data2['지역'] == option]
-    
+    # 선택된 지역이 있을 경우 데이터 필터링
+    if side_option:
+        filtered_data2 = data2[data2['지역'].isin(side_option)]
+    else:
+        filtered_data2 = data2
+
     # Plotly를 이용한 꺾은선 그래프
-    fig = px.line(filtered_data2, x='년도', y='순이동 인구수', title=f'2001년~2023년 대전시 {option} 순이동 변화', markers=True)
+    fig = px.line(filtered_data2, x='년도', y='순이동 인구수', color='지역', title=f'2001년~2023년 대전시 지역별 순이동 변화', markers=True)
     
     # x축의 모든 연도를 표시하도록 수정
     fig.update_xaxes(tickmode='linear', tick0=filtered_data2['년도'].min(), dtick=1)
